@@ -95,7 +95,7 @@ Route::group([
         // Requiçoes medicos com validaçõe JWT 
         // Cadastra medico novo
         Route::post('/medicos', [MedicoController::class, 'store']);
-        // Vincular Paciente medico novo
+        // Vincular Paciente medico 
         Route::post('/medicos/{id_medico}/pacientes', [MedicoController::class, 'vincularPaciente']);
     });
 });
