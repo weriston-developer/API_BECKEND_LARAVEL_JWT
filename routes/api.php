@@ -31,6 +31,8 @@ Route::group([
     'middleware' => 'api',
 
 ], function ($router) {
+    // Requiçoes Users 
+
     Route::post('/login', [UserController::class, 'login']);
     Route::post('/register', [UserController::class, 'store']);
 
@@ -42,17 +44,17 @@ Route::group([
         return new MedicoResource(Medico::findOrFail($id));
     });
 
-    Route::post('/medico-regristrar', [MedicoController::class, 'store']);
-    Route::delete('/medico/{id}', [MedicoController::class, 'destroy']);
 
     // Requiçoes cidades 
 
     Route::get('/cidades', function () {
         return CidadeResource::collection(Cidade::paginate());
     });
+    Route::get('/cidades/{id_cidade}/medicos', [CidadeController::class, 'medicosByCidade']);
 
     Route::middleware(ProtectAuthorizedRoutes::class)->group(function () {
         // Requiçoes ususarios com validaçõe JWT 
+
         // Lista usuarios
         Route::get('/users', function () {
             return UserResource::collection(User::paginate());
@@ -70,6 +72,7 @@ Route::group([
         // Deleta o  token do usuario
         Route::post('/logout', [UserController::class, 'logout']);
 
+
         // Requiçoes pacientes com validaçõe JWT 
         // lista pacientes
         Route::get('/pacientes', function () {
@@ -80,23 +83,19 @@ Route::group([
             return new PacienteResource(Paciente::findOrFail($id));
         });
         // Atualiza paciente especifico
-        Route::patch('/paciente/{id}', [PacienteController::class, 'update']);
+        Route::post('/pacientes/{id_paciente}', [PacienteController::class, 'update']);
+        // Criar paciente especifico
+        Route::post('/pacientes', [PacienteController::class, 'store']);
         // Deleta paciente especifico
         Route::delete('/paciente/{id}', [PacienteController::class, 'destroy']);
-        // Cadastra paciente novo
-        Route::post('/paciente-regristrar', [PacienteController::class, 'store']);
+        // Pacietes por medico 
+        Route::get('/medicos/{id_medico}/pacientes', [PacienteController::class, 'medicosByPacientes']);
+
 
         // Requiçoes medicos com validaçõe JWT 
         // Cadastra medico novo
-        Route::post('/medico-regristrar', [MedicoController::class, 'store']);
+        Route::post('/medicos', [MedicoController::class, 'store']);
+        // Vincular Paciente medico novo
+        Route::post('/medicos/{id_medico}/pacientes', [MedicoController::class, 'vincularPaciente']);
     });
 });
-
-Route::get('/cidades/{id_cidade}/medicos', [CidadeController::class, 'medicosByCidade']);
-Route::post('/medicos/{id_medico}/pacientes', [MedicoController::class, 'vincularPaciente']);
-Route::get('/medicos/{id_medico}/pacientes', [PacienteController::class, 'medicosByPacientes']);
-Route::post('/pacientes/{id_paciente}', [PacienteController::class, 'update']);
-Route::post('/pacientes', [PacienteController::class, 'store']);
-
-
-

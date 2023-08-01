@@ -5,6 +5,7 @@ namespace App\Http\Controllers\API;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\MedicoResource;
 use App\Http\Requests\MedicoRequest;
+use App\Http\Requests\MedicoUpdateRequest;
 use App\Http\Requests\VincularPacienteRequest;
 use App\Http\Resources\MedicoPacienteResource;
 use App\Models\Medico as ModelsMedico;
@@ -32,7 +33,7 @@ class MedicoController extends Controller
         }
     }
 
-    public function update(MedicoRequest $request, string $id)
+    public function update(MedicoUpdateRequest $request, string $id)
     {
         try {
             $medico = ModelsMedico::findOrFail($id);

@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class MedicoRequest extends FormRequest
+class MedicoUpdateRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,9 +22,9 @@ class MedicoRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'nome' => 'required|max:100|string',
-            'especialidade' => 'required|max:100|string',
-            'cidade_id' => 'required|exists:cidades,id',
+            'nome' => 'max:100|string',
+            'especialidade' => 'max:100|string',
+            'cidade_id' => 'exists:cidades,id',
         ];
     }
 }
