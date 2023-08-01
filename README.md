@@ -8,6 +8,12 @@ Esta é uma API Laravel com autenticação JWT para gerenciar usuários, médico
 
 ## Informações da API
 
+## O SISTEMA ESTÁ NA DEVELOP
+## O SISTEMA ESTÁ NA DEVELOP
+## O SISTEMA ESTÁ NA DEVELOP
+## O SISTEMA ESTÁ NA DEVELOP
+
+
 - **Nome da API**: Laravel API + JWT
 - **Versão**: 1.0.1
 
