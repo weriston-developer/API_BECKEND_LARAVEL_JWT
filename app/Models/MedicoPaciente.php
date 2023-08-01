@@ -4,6 +4,9 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class MedicoPaciente extends Model
@@ -17,12 +20,12 @@ class MedicoPaciente extends Model
         'medico_id', 'paciente_id'
     ];
 
-    public function medico()
+    public function medico(): BelongsTo
     {
         return $this->belongsTo(Medico::class, 'medico_id');
     }
 
-    public function paciente()
+    public function paciente(): BelongsTo
     {
         return $this->belongsTo(Paciente::class, 'paciente_id');
     }

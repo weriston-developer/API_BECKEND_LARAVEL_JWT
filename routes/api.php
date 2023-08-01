@@ -93,4 +93,10 @@ Route::group([
 });
 
 Route::get('/cidades/{id_cidade}/medicos', [CidadeController::class, 'medicosByCidade']);
-Route::post('/medicos/{id_medico}/pacientes', MedicoController::class, 'vincularPaciente');
+Route::post('/medicos/{id_medico}/pacientes', [MedicoController::class, 'vincularPaciente']);
+Route::get('/medicos/{id_medico}/pacientes', [PacienteController::class, 'medicosByPacientes']);
+Route::post('/pacientes/{id_paciente}', [PacienteController::class, 'update']);
+Route::post('/pacientes', [PacienteController::class, 'store']);
+
+
+

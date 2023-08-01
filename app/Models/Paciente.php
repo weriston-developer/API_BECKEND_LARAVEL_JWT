@@ -11,11 +11,12 @@ class Paciente extends Model
     use HasFactory;
 
     protected $fillable = [
-        'nome', 'cpf'
+        'nome', 'cpf', 'celular'
     ];
 
     public function medicoPaciente(): HasMany
     {
         return $this->hasMany(MedicoPaciente::class, 'paciente_id');
     }
+
 }

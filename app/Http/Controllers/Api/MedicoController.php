@@ -5,7 +5,10 @@ namespace App\Http\Controllers\API;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\MedicoResource;
 use App\Http\Requests\MedicoRequest;
+use App\Http\Requests\VincularPacienteRequest;
+use App\Http\Resources\MedicoPacienteResource;
 use App\Models\Medico as ModelsMedico;
+use App\Models\Paciente;
 use App\Services\MedicoService;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -51,5 +54,20 @@ class MedicoController extends Controller
         }
     }
 
-    
+    public function vincularPaciente(VincularPacienteRequest $request, string $id_medico)
+    {
+        try {
+            $medico = ModelsMedico::findOrFail($id_medico);
+
+            $paciente_id = $request->input('paciente_id');
+
+            $paciente = Paciente::findOrFail($paciente_id);
+          
+            $medicoPaciente = $this->medicoService->vincularPaciente($medico, $paciente);
+            
+            return new MedicoPacienteResource($medicoPaciente);
+        } catch (\Exception $e) {
+            return response()->json(['error' => $e->getMessage()], Response::HTTP_INTERNAL_SERVER_ERROR);
+        }
+    }
 }
