@@ -11,7 +11,7 @@ class VincularPacienteRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -23,6 +23,7 @@ class VincularPacienteRequest extends FormRequest
     {
         return [
             'paciente_id' => 'required|exists:pacientes,id',
+            'medico_id' => 'required|exists:medicos,id',
         ];
     }
 }

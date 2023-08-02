@@ -3,9 +3,8 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Validation\Rule;
 
-class PacienteRequest extends FormRequest
+class MedicoUpdateRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -23,10 +22,9 @@ class PacienteRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'nome' => 'required|max:100|string',
-            'cpf' => 'required|max:100|string|unique:pacientes,cpf',
-            'celular' => 'required|max:100|string',
-
+            'nome' => 'max:100|string',
+            'especialidade' => 'max:100|string',
+            'cidade_id' => 'exists:cidades,id',
         ];
     }
 }

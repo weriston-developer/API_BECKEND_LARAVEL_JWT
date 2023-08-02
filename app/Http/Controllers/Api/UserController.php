@@ -12,8 +12,6 @@ use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
-
-
     private $loginService;
 
     public function __construct(LoginService $loginService)
@@ -21,10 +19,10 @@ class UserController extends Controller
         $this->loginService = $loginService;
     }
 
-
     public function store(StoreUserRequest $request)
     {
         try {
+            
             $data = $request->validated();
             $data['password'] = bcrypt($request->password);
 
@@ -36,12 +34,12 @@ class UserController extends Controller
         }
     }
 
-
     public function login(Request $request)
     {
         try {
             $credentials = $request->only('email', 'password');
-            $auth =  $this->loginService->execute($credentials);
+            $auth = $this->loginService->execute($credentials);
+
             return response()->json(['success' => 'user login', 'message' => $auth], 200);
         } catch (ModelNotFoundException $e) {
             return response()->json(['error' => 'User not found'], 404);
@@ -63,14 +61,11 @@ class UserController extends Controller
     {
         try {
             auth()->logout(true);
-   
+
         } catch (\Exception $e) {
             return response()->json(['error' => true, 'message' => $e->getMessage()], $e->getCode());
         }
     }
-
-
-    
 
     public function update(StoreUserRequest $request, string $id)
     {

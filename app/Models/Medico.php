@@ -12,12 +12,12 @@ class Medico extends Model
     use HasFactory;
 
     protected $fillable = [
-        'nome', 'especialidade', 'cidade_id'
+        'nome', 'especialidade', 'cidade_id',
     ];
 
     public function cidade(): BelongsTo
     {
-        return $this->belongsTo(Cidade::class, 'cidade_id');
+        return $this->BelongsTo(Cidade::class, 'cidade_id');
     }
 
     public function medicoPaciente(): HasMany

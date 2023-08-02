@@ -4,7 +4,6 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
-use Symfony\Component\HttpFoundation\Response;
 use Tymon\JWTAuth\Exceptions\TokenExpiredException;
 use Tymon\JWTAuth\Exceptions\TokenInvalidException;
 use Tymon\JWTAuth\Facades\JWTAuth;
@@ -25,7 +24,7 @@ class ProtectAuthorizedRoutes
         } catch (\Exception $e) {
             if ($e instanceof TokenInvalidException) {
                 return response()->json(['status' => 'Token is invalid'], 401);
-            } else if ($e instanceof TokenExpiredException) {
+            } elseif ($e instanceof TokenExpiredException) {
                 return response()->json(['status' => 'Token is Expired'], 401);
             } else {
                 return response()->json(['status' => 'Authorization Token not Found'], 401);
