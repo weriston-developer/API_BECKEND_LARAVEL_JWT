@@ -1,16 +1,15 @@
 Aqui está o README que explica cada endpoint da sua API Laravel com JWT. Para testar cada endpoint, basta copiar a URL correspondente e utilizar ferramentas como o Postman ou o cURL para fazer as requisições HTTP. Lembre-se de realizar as ações de autenticação (login) para obter o token JWT e incluí-lo no cabeçalho `Authorization` das requisições protegidas por JWT.
 
 ---
+# php artisan migrate
+# php artisan db:seed
 
 # Laravel API + JWT
 
-Esta é uma API Laravel com autenticação JWT para gerenciar usuários, médicos, pacientes e cidades!
+Esta é uma API Laravel com autenticação JWT para gerenciar usuários, médicos, pacientes e cidades!clear
 
 ## Informações da API
 
-## O SISTEMA ESTÁ NA DEVELOP
-## O SISTEMA ESTÁ NA DEVELOP
-## O SISTEMA ESTÁ NA DEVELOP
 ## O SISTEMA ESTÁ NA DEVELOP
 
 
