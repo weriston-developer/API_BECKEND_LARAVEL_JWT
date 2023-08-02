@@ -3,15 +3,13 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
-use App\Http\Resources\PacienteResource;
 use App\Http\Requests\PacienteRequest;
 use App\Http\Requests\PacienteUpdateRequest;
 use App\Http\Resources\PacienteFromMedicoPacienteResource;
-use App\Models\Medico;
+use App\Http\Resources\PacienteResource;
 use App\Models\MedicoPaciente;
 use App\Models\Paciente as ModelsPaciente;
 use App\Services\PacienteService;
-use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 
 class PacienteController extends Controller
@@ -32,6 +30,7 @@ class PacienteController extends Controller
                 return response()->json(['errors' => ['cpf' => 'CPF inválido']], 422);
             }
             $paciente = $this->pacienteService->create($request->validated());
+
             return new PacienteResource($paciente);
         } catch (\Exception $e) {
             return response()->json(['error' => 'Erro ao criar paciente: ' . $e->getMessage()], Response::HTTP_INTERNAL_SERVER_ERROR);
@@ -48,6 +47,7 @@ class PacienteController extends Controller
             }
             $paciente = ModelsPaciente::findOrFail($id);
             $paciente = $this->pacienteService->update($paciente, $request->validated());
+
             return new PacienteResource($paciente);
         } catch (\Exception $e) {
             return response()->json(['error' => 'Erro ao atualizar paciente: ' . $e->getMessage()], Response::HTTP_INTERNAL_SERVER_ERROR);
@@ -58,13 +58,14 @@ class PacienteController extends Controller
     {
         try {
             $paciente = ModelsPaciente::findOrFail($id);
+            $paciente->medicos()->detach(); 
             $this->pacienteService->destroy($paciente);
+
             return response()->json(['message' => 'Paciente excluído com sucesso.'], Response::HTTP_OK);
         } catch (\Exception $e) {
             return response()->json(['error' => 'Erro ao excluir paciente: ' . $e->getMessage()], Response::HTTP_INTERNAL_SERVER_ERROR);
         }
     }
-
 
     public function medicosByPacientes(string $medico_id)
     {

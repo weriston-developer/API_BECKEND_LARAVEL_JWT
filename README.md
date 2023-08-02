@@ -14,6 +14,8 @@ Esta é uma API Laravel com autenticação JWT para gerenciar usuários, médico
 ## O SISTEMA ESTÁ NA DEVELOP
 
 
+## O Tipo do Token é Bearer lembre-se de validar seu user e pegar o token para acessar as telas que precisam de validação
+
 - **Nome da API**: Laravel API + JWT
 - **Versão**: 1.0.1
 
@@ -25,17 +27,18 @@ Esta é uma API Laravel com autenticação JWT para gerenciar usuários, médico
 - **Método**: `GET`
 - **Descrição**: Retorna informações básicas da API, como nome e versão.
 
+### Rota de Registro de Usuário
+
+- **URL**: `/register`
+- **Método**: `POST`
+- **Descrição**: Cria um novo usuário no sistema. Recebe `name`, `email` e `password` no corpo da requisição.
+
 ### Rota de Autenticação - Login
 
 - **URL**: `/login`
 - **Método**: `POST`
 - **Descrição**: Realiza a autenticação do usuário. Recebe `email` e `password` no corpo da requisição e retorna um token JWT válido em caso de sucesso.
 
-### Rota de Registro de Usuário
-
-- **URL**: `/register`
-- **Método**: `POST`
-- **Descrição**: Cria um novo usuário no sistema. Recebe `name`, `email` e `password` no corpo da requisição.
 
 ### Rota de Listagem de Médicos
 
@@ -117,13 +120,15 @@ As seguintes rotas requerem autenticação JWT (Bearer Token) no cabeçalho `Aut
 
 - **URL**: `/pacientes/{id_paciente}`
 - **Método**: `POST`
-- **Descrição**: Atualiza um paciente específico com base no ID fornecido. Requer autenticação JWT. Permite atualizar apenas os campos `nome` e `celular`.
+- **Descrição**: Atualiza um paciente específico com base no ID fornecido. Requer autenticação JWT. Permite atualizar apenas os campos `nome` e `celular` e `cpf`.
+**Observação**: CPF  precisa ser válido ! link: https://www.4devs.com.br/gerador_de_cpf
 
 #### Rota de Criação de um Paciente
 
 - **URL**: `/pacientes`
 - **Método**: `POST`
 - **Descrição**: Cria um novo paciente no sistema. Requer autenticação JWT. Recebe `nome`, `celular` e  `cpf`  no corpo da requisição.
+**Observação**: CPF  precisa ser válido ! link: https://www.4devs.com.br/gerador_de_cpf
 
 #### Rota de Deleção de um Paciente
 
@@ -149,7 +154,7 @@ As seguintes rotas requerem autenticação JWT (Bearer Token) no cabeçalho `Aut
 
 - **URL**: `/medicos/{id_medico}/pacientes`
 - **Método**: `POST`
-- **Descrição**: Vincula um paciente a um médico específico com base no ID do médico fornecido. Requer autenticação JWT. Recebe `paciente_id` no corpo da requisição.
+- **Descrição**: Vincula um paciente a um médico específico com base no ID do médico fornecido. Requer autenticação JWT. Recebe `paciente_id` e `medico_id` no corpo da requisição.
 
 ---
 

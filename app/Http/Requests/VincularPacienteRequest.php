@@ -23,6 +23,7 @@ class VincularPacienteRequest extends FormRequest
     {
         return [
             'paciente_id' => 'required|exists:pacientes,id',
+            'medico_id' => 'required|exists:medicos,id',
         ];
     }
 }

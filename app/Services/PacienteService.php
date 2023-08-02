@@ -3,7 +3,6 @@
 namespace App\Services;
 
 use App\Models\Paciente;
-use Illuminate\Validation\ValidationException;
 
 class PacienteService
 {
@@ -11,9 +10,10 @@ class PacienteService
     {
         try {
             $paciente = Paciente::create($data);
+
             return $paciente;
         } catch (\Exception $e) {
-            throw new \Exception('Erro ao criar paciente: ' . $e->getMessage());
+            throw new \Exception('Erro ao criar paciente: '.$e->getMessage());
         }
     }
 
@@ -21,9 +21,10 @@ class PacienteService
     {
         try {
             $paciente->update($data);
+
             return $paciente;
         } catch (\Exception $e) {
-            throw new \Exception('Erro ao atualizar paciente: ' . $e->getMessage());
+            throw new \Exception('Erro ao atualizar paciente: '.$e->getMessage());
         }
     }
 
@@ -32,11 +33,11 @@ class PacienteService
         try {
             $paciente->delete();
         } catch (\Exception $e) {
-            throw new \Exception('Erro ao excluir paciente: ' . $e->getMessage());
+            throw new \Exception('Erro ao excluir paciente: '.$e->getMessage());
         }
     }
 
-     /**
+    /**
      * Valida um número de CPF
      */
     public function validarCPF(string $cpf): bool

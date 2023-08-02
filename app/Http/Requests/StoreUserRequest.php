@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class StoreUserRequest extends FormRequest
 {
@@ -27,13 +28,13 @@ class StoreUserRequest extends FormRequest
                 'required',
                 'email',
                 'max:255',
-                'unique:users'
+                Rule::unique('users')
             ],
             'password' => [
                 'required',
                 'min:8',
-                'max:100'
-            ]
+                'max:100',
+            ],
         ];
 
         if ($this->method() === 'PATCH') {
@@ -41,14 +42,15 @@ class StoreUserRequest extends FormRequest
                 'required',
                 'email',
                 'max:255',
-                "unique:users,email,{$this->id},id"
+                "unique:users,email,{$this->id},id",
             ];
             $rules['password'] = [
                 'nullable',
                 'min:8',
-                'max:100'
+                'max:100',
             ];
         }
+
         return $rules;
     }
 }

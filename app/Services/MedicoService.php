@@ -5,7 +5,6 @@ namespace App\Services;
 use App\Models\Medico;
 use App\Models\MedicoPaciente;
 use App\Models\Paciente;
-use Illuminate\Validation\ValidationException;
 
 class MedicoService
 {
@@ -13,9 +12,10 @@ class MedicoService
     {
         try {
             $medico = Medico::create($data);
+
             return $medico;
         } catch (\Exception $e) {
-            throw new \Exception('Erro ao criar médico: ' . $e->getMessage());
+            throw new \Exception('Erro ao criar médico: '.$e->getMessage());
         }
     }
 
@@ -23,9 +23,10 @@ class MedicoService
     {
         try {
             $medico->update($data);
+
             return $medico;
         } catch (\Exception $e) {
-            throw new \Exception('Erro ao atualizar médico: ' . $e->getMessage());
+            throw new \Exception('Erro ao atualizar médico: '.$e->getMessage());
         }
     }
 
@@ -34,7 +35,7 @@ class MedicoService
         try {
             $medico->delete();
         } catch (\Exception $e) {
-            throw new \Exception('Erro ao excluir médico: ' . $e->getMessage());
+            throw new \Exception('Erro ao excluir médico: '.$e->getMessage());
         }
     }
 
@@ -51,9 +52,10 @@ class MedicoService
                 'paciente_id' => $paciente->id,
             ]);
             $medicoPaciente->save();
+
             return $medicoPaciente;
         } catch (\Exception $e) {
-            throw new \Exception('Erro ao vincular paciente ao médico: ' . $e->getMessage());
+            throw new \Exception('Erro ao vincular paciente ao médico: '.$e->getMessage());
         }
     }
 }

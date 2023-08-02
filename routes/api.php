@@ -15,28 +15,24 @@ use App\Models\Paciente;
 use App\Models\User;
 use Illuminate\Support\Facades\Route;
 
-
-
-
 Route::get('/', function () {
     return response()->json([
         'api_name' => 'Laravel API + JWT.',
-        'api_version' => '1.0.1'
+        'api_version' => '1.0.1',
     ]);
 });
-
 
 Route::group([
 
     'middleware' => 'api',
 
 ], function ($router) {
-    // Requiçoes Users 
+    // Requiçoes Users
 
     Route::post('/login', [UserController::class, 'login']);
     Route::post('/register', [UserController::class, 'store']);
 
-    // Requiçoes Medicos 
+    // Requiçoes Medicos
     Route::get('/medicos', function () {
         return MedicoResource::collection(Medico::paginate());
     });
@@ -44,8 +40,7 @@ Route::group([
         return new MedicoResource(Medico::findOrFail($id));
     });
 
-
-    // Requiçoes cidades 
+    // Requiçoes cidades
 
     Route::get('/cidades', function () {
         return CidadeResource::collection(Cidade::paginate());
@@ -53,7 +48,7 @@ Route::group([
     Route::get('/cidades/{id_cidade}/medicos', [CidadeController::class, 'medicosByCidade']);
 
     Route::middleware(ProtectAuthorizedRoutes::class)->group(function () {
-        // Requiçoes ususarios com validaçõe JWT 
+        // Requiçoes ususarios com validaçõe JWT
 
         // Lista usuarios
         Route::get('/users', function () {
@@ -72,8 +67,7 @@ Route::group([
         // Deleta o  token do usuario
         Route::post('/logout', [UserController::class, 'logout']);
 
-
-        // Requiçoes pacientes com validaçõe JWT 
+        // Requiçoes pacientes com validaçõe JWT
         // lista pacientes
         Route::get('/pacientes', function () {
             return PacienteResource::collection(Paciente::paginate());
@@ -88,14 +82,13 @@ Route::group([
         Route::post('/pacientes', [PacienteController::class, 'store']);
         // Deleta paciente especifico
         Route::delete('/paciente/{id}', [PacienteController::class, 'destroy']);
-        // Pacietes por medico 
+        // Pacietes por medico
         Route::get('/medicos/{id_medico}/pacientes', [PacienteController::class, 'medicosByPacientes']);
 
-
-        // Requiçoes medicos com validaçõe JWT 
+        // Requiçoes medicos com validaçõe JWT
         // Cadastra medico novo
         Route::post('/medicos', [MedicoController::class, 'store']);
-        // Vincular Paciente medico 
+        // Vincular Paciente medico
         Route::post('/medicos/{id_medico}/pacientes', [MedicoController::class, 'vincularPaciente']);
     });
 });

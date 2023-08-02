@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class PacienteRequest extends FormRequest
 {
@@ -23,7 +24,7 @@ class PacienteRequest extends FormRequest
     {
         return [
             'nome' => 'required|max:100|string',
-            'cpf' => 'required|max:100|string',
+            'cpf' => 'required|max:100|string|unique:pacientes,cpf',
             'celular' => 'required|max:100|string',
 
         ];

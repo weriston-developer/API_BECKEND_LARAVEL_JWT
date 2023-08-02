@@ -14,6 +14,7 @@ class CidadeService
     public function update(cidade $cidade, array $data)
     {
         $cidade->update($data);
+
         return $cidade;
     }
 
@@ -28,9 +29,10 @@ class CidadeService
             $cidade = Cidade::findOrFail($id_cidade);
 
             $medicos = $cidade->medicos()->paginate();
+
             return $medicos;
         } catch (\Exception $e) {
-            throw new \Exception('Erro ao buscar médicos da cidade: ' . $e->getMessage());
+            throw new \Exception('Erro ao buscar médicos da cidade: '.$e->getMessage());
         }
     }
 }

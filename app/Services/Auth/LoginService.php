@@ -6,7 +6,7 @@ class LoginService
 {
     public function execute(array $credentials): array
     {
-        if (!$token = auth()->setTTL(6 * 60)->attempt($credentials)) {
+        if (! $token = auth()->setTTL(6 * 60)->attempt($credentials)) {
             throw new \Exception('not authenticate', 401);
         }
 
