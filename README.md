@@ -4,13 +4,10 @@ Aqui está o README que explica cada endpoint da sua API Laravel com JWT. Para t
 
 # Laravel API + JWT
 
-Esta é uma API Laravel com autenticação JWT para gerenciar usuários, médicos, pacientes e cidades!
+Esta é uma API Laravel com autenticação JWT para gerenciar usuários, médicos, pacientes e cidades!clear
 
 ## Informações da API
 
-## O SISTEMA ESTÁ NA DEVELOP
-## O SISTEMA ESTÁ NA DEVELOP
-## O SISTEMA ESTÁ NA DEVELOP
 ## O SISTEMA ESTÁ NA DEVELOP
 
 
