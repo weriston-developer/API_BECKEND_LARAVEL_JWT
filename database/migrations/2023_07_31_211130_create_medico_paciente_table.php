@@ -19,8 +19,9 @@ return new class extends Migration
             $table->softDeletes();
 
             // Chaves estrangeiras
-            $table->foreign('medico_id')->references('id')->on('medicos');
-            $table->foreign('paciente_id')->references('id')->on('pacientes');
+            // Chaves estrangeiras
+            $table->foreign('medico_id')->references('id')->on('medicos')->onDelete('cascade');
+            $table->foreign('paciente_id')->references('id')->on('pacientes')->onDelete('cascade');
         });
     }
 

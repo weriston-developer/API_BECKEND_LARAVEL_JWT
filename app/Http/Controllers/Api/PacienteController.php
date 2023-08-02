@@ -58,8 +58,8 @@ class PacienteController extends Controller
     {
         try {
             $paciente = ModelsPaciente::findOrFail($id);
-            $paciente->medicos()->detach(); 
-            $this->pacienteService->destroy($paciente);
+                    
+            $paciente->delete();
 
             return response()->json(['message' => 'Paciente excluído com sucesso.'], Response::HTTP_OK);
         } catch (\Exception $e) {

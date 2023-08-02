@@ -60,7 +60,7 @@ class MedicoController extends Controller
     public function vincularPaciente(VincularPacienteRequest $request, string $id_medico)
     {
         try {
-            $medico_id = $request->input('paciente_id');
+            $medico_id = $request->input('medico_id');
 
             $medico = ModelsMedico::findOrFail($medico_id);
 
